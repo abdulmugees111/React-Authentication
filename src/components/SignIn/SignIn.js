@@ -8,22 +8,21 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
 } from "firebase/auth";
-import "../SignUp/SignUp.css"
-import { BiHide, BiShow } from "react-icons/bi"; // Import eye icons from an icon library
+import "../SignUp/SignUp.css";
+import { BiHide, BiShow } from "react-icons/bi";
 
 const SignIn = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false); // State variable to toggle password visibility
+  const [showPassword, setShowPassword] = useState(false);
 
   const onLogin = (e) => {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // Signed in
         const user = userCredential.user;
-        navigate("/");
+        navigate("/home");
         console.log(user);
       })
       .catch((error) => {
@@ -39,11 +38,9 @@ const SignIn = () => {
     signInWithPopup(auth, facebookProvider)
       .then((result) => {
         const user = result.user;
-        // Handle the signed-in user as needed
-        navigate("/");
+        navigate("/home");
       })
       .catch((error) => {
-        // Handle any errors
         console.error(error);
       });
   };
@@ -53,11 +50,9 @@ const SignIn = () => {
     signInWithPopup(auth, googleProvider)
       .then((result) => {
         const user = result.user;
-        // Handle the signed-in user as needed
-        navigate("/");
+        navigate("/home");
       })
       .catch((error) => {
-        // Handle any errors
         console.error(error);
       });
   };
@@ -65,7 +60,7 @@ const SignIn = () => {
     setShowPassword(!showPassword);
   };
   return (
-    <>
+    <div>
       <main>
         <section className="container">
           <div className="row">
@@ -87,7 +82,10 @@ const SignIn = () => {
                 <i className="bi bi-google me-2"></i>
                 <div className="row">
                   <div className="col-lg-6 col-sm-12">
-                    <button className="btn-google mb-2 w-100" onClick={onLoginWithGoogle}>
+                    <button
+                      className="btn-google mb-2 w-100"
+                      onClick={onLoginWithGoogle}
+                    >
                       <img
                         src="/google.svg"
                         alt="google Image"
@@ -97,7 +95,10 @@ const SignIn = () => {
                     </button>
                   </div>
                   <div className="col-lg-6 col-sm-12">
-                    <button className="mb-2 w-100 btn-facebook" onClick={onLoginWithFacebook}>
+                    <button
+                      className="mb-2 w-100 btn-facebook"
+                      onClick={onLoginWithFacebook}
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 16 16"
@@ -117,9 +118,8 @@ const SignIn = () => {
                     <div className="rectangle" />
                     <div className="text-wrapper">or</div>
                     <div className="rectangle" />
-                    </div>
+                  </div>
                   <div className="input-container">
-                    
                     <div className="col-12 mb-3">
                       <label className="label">Email</label>
 
@@ -135,27 +135,28 @@ const SignIn = () => {
                       />
                     </div>
                     <div className="col-12 mb-3">
-                <label className="label">Password</label>
-                <div className="input-group">
-                  <input
-                    type={showPassword ? "text" : "password"}
-                    className="form-control"
-                    id="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                    placeholder="Password"
-                  />
-                  <button
-                    className="btn btn-outline-secondary"
-                    type="button"
-                    onClick={togglePasswordVisibility}
-                  >
-                    {showPassword ? <BiHide /> : <BiShow />} {/* Eye icon */}
-                  </button>
-                </div>
-              </div>
-                   
+                      <label className="label">Password</label>
+                      <div className="input-group">
+                        <input
+                          type={showPassword ? "text" : "password"}
+                          className="form-control"
+                          id="password"
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
+                          required
+                          placeholder="Password"
+                        />
+                        <button
+                          className="btn btn-outline-secondary"
+                          type="button"
+                          onClick={togglePasswordVisibility}
+                        >
+                          {showPassword ? <BiHide /> : <BiShow />}{" "}
+                          {/* Eye icon */}
+                        </button>
+                      </div>
+                    </div>
+
                     <div className="col-12 mb-3">
                       <label className="label">Company ID</label>
 
@@ -184,90 +185,38 @@ const SignIn = () => {
                       className="btn btn-primary"
                       onClick={onLogin}
                     >
-                      Sign up
+                      Sign In
                     </button>
                   </div>
                 </div>
-
               </form>
-              <button className="eng-btn"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <g id="Frame">
-              <path id="Vector" d="M10.5 21L15.75 9.75L21 21M12 18H19.5M3 5.621C4.9904 5.37332 6.99425 5.24941 9 5.25M9 5.25C10.12 5.25 11.233 5.288 12.334 5.364M9 5.25V3M12.334 5.364C11.176 10.658 7.69 15.08 3 17.502M12.334 5.364C13.23 5.425 14.119 5.511 15 5.621M10.411 14.116C8.77097 12.4486 7.47113 10.478 6.584 8.314" stroke="#242731" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </g>
-              </svg>
-              I English</button>
-
+              <button className="eng-btn">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g id="Frame">
+                    <path
+                      id="Vector"
+                      d="M10.5 21L15.75 9.75L21 21M12 18H19.5M3 5.621C4.9904 5.37332 6.99425 5.24941 9 5.25M9 5.25C10.12 5.25 11.233 5.288 12.334 5.364M9 5.25V3M12.334 5.364C11.176 10.658 7.69 15.08 3 17.502M12.334 5.364C13.23 5.425 14.119 5.511 15 5.621M10.411 14.116C8.77097 12.4486 7.47113 10.478 6.584 8.314"
+                      stroke="#242731"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </g>
+                </svg>
+                I English
+              </button>
             </div>
           </div>
         </section>
       </main>
-    </>
+    </div>
   );
 };
 
 export default SignIn;
-
-// <main >
-//                 <section>
-//                     <div>
-//                         <p> FocusApp </p>
-
-//                         <form>
-//                         <div>
-//   <button onClick={onLoginWithFacebook} className="facebook-button">
-//     Login with Facebook
-//   </button>
-// </div>
-// <div>
-//   <button onClick={onLoginWithGoogle} className="google-button">
-//     Login with Google
-//   </button>
-// </div>
-
-//                             <div>
-//                                 <label htmlFor="email-address">
-//                                     Email address
-//                                 </label>
-//                                 <input
-//                                     id="email-address"
-//                                     name="email"
-//                                     type="email"
-//                                     required
-//                                     placeholder="Email address"
-//                                     onChange={(e)=>setEmail(e.target.value)}
-//                                 />
-//                             </div>
-
-//                             <div>
-//                                 <label htmlFor="password">
-//                                     Password
-//                                 </label>
-//                                 <input
-//                                     id="password"
-//                                     name="password"
-//                                     type="password"
-//                                     required
-//                                     placeholder="Password"
-//                                     onChange={(e)=>setPassword(e.target.value)}
-//                                 />
-//                             </div>
-
-//                             <div>
-//                                 <button
-//                                     onClick={onLogin}
-//                                 >
-//                                     Login
-//                                 </button>
-//                             </div>
-//                         </form>
-
-//                         <p className="text-sm text-white text-center">
-//                             No account yet? {' '}
-//                             <NavLink to="/signUp">
-//                                 Sign up
-//                             </NavLink>
-//                         </p>
-
-//                     </div>
-//                 </section>
-//             </main>

@@ -2,35 +2,30 @@ import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebaseConfig";
-import { useLocation } from "react-router-dom";
 import "./SignUp.css"
 import "bootstrap/dist/css/bootstrap.min.css";
-import { BiHide, BiShow } from "react-icons/bi"; // Import eye icons from React Icons
+import { BiHide, BiShow } from "react-icons/bi"; 
 
 const Signup = () => {
   const navigate = useNavigate();
-  const location = useLocation();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false); // State variable to toggle password visibility
+  const [showPassword, setShowPassword] = useState(false);
 
   const onSubmit = async (e) => {
     e.preventDefault();
 
     await createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // Signed in
         const user = userCredential.user;
         console.log(user);
-        navigate("/signIn");
-        // ...
+        navigate("/");
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode, errorMessage);
-        // ..
       });
   };
   const togglePasswordVisibility = () => {
@@ -46,7 +41,7 @@ const Signup = () => {
 
           <div className="col-lg-5 col-sm-12 left-con ">
             <h2 className="fw-bold">Get's Started.</h2>
-     <p className="mt-2">Have an account?  <NavLink to="/signIn">Sign in</NavLink></p>
+     <p className="mt-2">Have an account?  <NavLink to="/">Sign in</NavLink></p>
             <form> <i className="bi bi-google me-2"></i> 
               <div className="row">
                 <div className="col-lg-6 col-sm-12">
